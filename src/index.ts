@@ -1,8 +1,22 @@
 import { Webview } from "@webview/webview";
 
-const webview = new Webview();
+const html = `
+<html>
+<body>
+<h1>Hello from deno v${Deno.version.deno}</h1>
+<button onclick="openFile('./src/index.ts').then(log);">Open</button>
+</body>
+</html>
+`;
 
-webview.navigate(new URL(`${import.meta.dirname}/index.html`));
-webview.title = "Hello world!";
+const webview = new Webview(true);
+
+webview.navigate(`data:text/html,${encodeURIComponent(html)}`);
+
+webview.bind("openFile", (file) => {
+  return Deno.readTextFileSync(file)
+});
+
+webview.bind("log", (...args) => console.log(...args));
 
 webview.run();

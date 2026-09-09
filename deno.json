@@ -10,7 +10,7 @@
     },
     "bundle": {
       "description": "Bundle all app frontend files for production.",
-      "command": "deno bundle --outdir ./dist/bundle --minify src/client/index.html",
+      "command": "deno bundle --outdir ./dist/frontend --minify src/client/index.html",
       "dependencies": [ "clear-dist" ]
     },
     "bundle:watch": {
@@ -19,7 +19,7 @@
     },
     "bundle:development": {
       "description": "Bundle all app frontend files for development.",
-      "command": "deno bundle --outdir ./dist/bundle --sourcemap src/client/index.html",
+      "command": "deno bundle --outdir ./dist/frontend --sourcemap src/client/index.html",
       "dependencies": [ "clear-dist" ]
     },
     "bundle:development:watch": {
@@ -28,7 +28,7 @@
     },
     "build": {
       "description": "Build the desktop executable for production.",
-      "command": "deno desktop -A ./src/server/index.ts",
+      "command": "deno desktop --include dist/frontend ./src/server/index.ts",
       "dependencies": [ "bundle" ]
     },
     "cache-reload": {

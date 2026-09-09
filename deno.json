@@ -49,8 +49,12 @@
       "dependencies": [ "clear-reports" ]
     }
   },
-  "compile": {
-    "include": [ "./dist/bundle" ]
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "deno.unstable",
+      "deno.desktop"
+    ]
   },
   "desktop": {
     "app": {
@@ -61,7 +65,7 @@
         "macos": "./src/icons/macos.icns"
       }
     },
-    "backend": "cef",
+    "backend": "webview",
     "output": {
       "windows": "./dist/build/template_desktop_app.msi",
       "linux": "./dist/build/template_desktop_app.rpm",
